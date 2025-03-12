@@ -1,11 +1,12 @@
 import numpy as np
 import streamlit as st
+import requests
 import pandas as pd
+from io import StringIO
 import matplotlib.pyplot as plt
 import seaborn as sns
 from babel.numbers import format_currency
 import geopandas as gpd
-import requests
 import folium
 from streamlit_folium import folium_static
 sns.set(style='dark')
