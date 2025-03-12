@@ -87,7 +87,18 @@ def create_review_distribution_df(df):
 
     return df_ratings, rating_percentage
 
-all_df = pd.read_csv("main_data.csv")
+def load_data_from_drive():
+    file_id = "15NOV_6NHZccp3HY2FrS92u4qhXLai8dU"
+    url = f"https://drive.google.com/uc?id={file_id}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text))
+    else:
+        st.error("Gagal memuat data. Periksa kembali link Google Drive Anda.")
+        return None
+
+all_df = load_data_from_drive()
 datetime_columns = ["order_purchase_timestamp", "order_delivered_customer_date"]
 all_df.sort_values(by="order_purchase_timestamp", inplace=True)
 all_df.reset_index(drop=True, inplace=True)
@@ -361,7 +372,18 @@ if required_columns.issubset(rfm_df.columns):
 else:
     st.warning("Dataset tidak memiliki kolom yang dibutuhkan! Pastikan dataset memuat kolom 'customer_unique_id', 'recency', 'frequency', dan 'monetary'.")
 
-geo_df = pd.read_csv("../data/geolocation_dataset.csv")
+def load_data2_from_drive():
+    file_id = "1qELeKQ9fiBYmiWCyPjEZs4hDePZg2RaN" 
+    url = f"https://drive.google.com/uc?id={file_id}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return pd.read_csv(StringIO(response.text))
+    else:
+        st.error("Gagal memuat data. Periksa kembali link Google Drive Anda.")
+        return None
+
+geo_df = load_data2_from_drive()
 geo_df["geolocation_lat"] = pd.to_numeric(geo_df["geolocation_lat"], errors='coerce')
 geo_df["geolocation_lng"] = pd.to_numeric(geo_df["geolocation_lng"], errors='coerce')
 geo_df = geo_df.groupby("geolocation_zip_code_prefix").agg({
