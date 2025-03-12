@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from babel.numbers import format_currency
 import geopandas as gpd
+import requests
 import folium
 from streamlit_folium import folium_static
 sns.set(style='dark')
