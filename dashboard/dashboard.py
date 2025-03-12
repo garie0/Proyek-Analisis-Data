@@ -112,7 +112,7 @@ min_date = all_df["order_purchase_timestamp"].min().date()
 max_date = all_df["order_purchase_timestamp"].max().date()
 
 with st.sidebar:
-    st.image("../logo.webp")
+    st.image("logo.webp")
     start_date, end_date = st.date_input(
         label='Rentang Waktu',
         min_value=min_date,
